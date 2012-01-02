@@ -3,7 +3,7 @@
 colorscheme desert
 set guifont=Consolas:h11
 
-" swap dosyalarinin ayni dizinde olusturulmamasini saglar
+" swap ve backup dosyalarindan kurtulma
 set nobackup
 set noswapfile
 
@@ -14,6 +14,14 @@ set cindent
 
 " jj ile esc yapilmasini saglar
 inoremap jj <Esc>
+
+" Command mode'a gecmek icin : kullanmak yerine  ; kullanabilme
+nnoremap ; :
+
+" ,/ ile search highlight'larini kaldirma. 
+" /asdf gibi sacma bi search yapmaya gerek kalmiyor ve 
+" search history de oldugu gibi kalmis oluyor
+nmap <silent> ,/ :nohlsearch<CR>
 
 " fold blocklarini daha sade gosterme
 set foldtext=getline(v:foldstart)
@@ -26,12 +34,6 @@ inoremap <A-j> <Esc>:m+<CR>==gi
 inoremap <A-k> <Esc>:m-2<CR>==gi
 vnoremap <A-j> :m'>+<CR>gv=gv
 vnoremap <A-k> :m-2<CR>gv=gv
-
-" ,/ ile search highlight'larini kaldirma
-nmap <silent> ,/ :nohlsearch<CR>
-
-" Command mode'a gecerken : kullanmak yerine daha hizli olan ; kullanabilme
-nnoremap ; :
 
 " F4 ile uzerinde bulunulan kelimeyi ayni dizindeki dosyalarda arama
 map <F4> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR> 
