@@ -12,6 +12,9 @@ set ts=4
 set sw=4
 set cindent
 
+" vertical split'de yenisini default sag tarafta yaratma
+set splitright
+
 " jj ile esc yapilmasini saglar
 inoremap jj <Esc>
 
@@ -44,3 +47,4 @@ au BufNewFile,BufRead *.cshtml set filetype=html
 " Pathogen
 call pathogen#infect() 
 call pathogen#helptags()
+
