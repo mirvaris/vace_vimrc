@@ -28,6 +28,10 @@ map <S-L> gt
 " Y ile satir sonuna kadar yank'lama. C ve D gibi
 nnoremap Y y$
 
+" visual shifting (does not exit Visual mode)
+vnoremap < <gv
+vnoremap > >gv
+
 " cd. ile working directory'yi file'in bulundugu folder'a set etme
 cmap cd. lcd %:p:h
 
