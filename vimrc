@@ -21,6 +21,16 @@ inoremap jj <Esc>
 " Command mode'a gecmek icin : kullanmak yerine  ; kullanabilme
 nnoremap ; :
 
+" Tablar arasinda kolay gezme
+map <S-H> gT          
+map <S-L> gt
+
+" Y ile satir sonuna kadar yank'lama. C ve D gibi
+nnoremap Y y$
+
+" cd. ile working directory'yi file'in bulundugu folder'a set etme
+cmap cd. lcd %:p:h
+
 " ,/ ile search highlight'larini kaldirma. 
 " /asdf gibi sacma bi search yapmaya gerek kalmiyor ve 
 " search history de oldugu gibi kalmis oluyor
