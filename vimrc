@@ -28,12 +28,12 @@ map <S-L> gt
 " Y ile satir sonuna kadar yank'lama. C ve D gibi
 nnoremap Y y$
 
-" visual shifting (does not exit Visual mode)
-vnoremap < <gv
-vnoremap > >gv
-
 " cd. ile working directory'yi file'in bulundugu folder'a set etme
 cmap cd. lcd %:p:h
+
+" visual shifting (does not exit Visual mode)
+vnoremap < <gv
+vnoremap > >gv 
 
 " ,/ ile search highlight'larini kaldirma. 
 " /asdf gibi sacma bi search yapmaya gerek kalmiyor ve 
@@ -52,6 +52,12 @@ inoremap <A-k> <Esc>:m-2<CR>==gi
 vnoremap <A-j> :m'>+<CR>gv=gv
 vnoremap <A-k> :m-2<CR>gv=gv
 
+" Smart way to move between windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
 " F4 ile uzerinde bulunulan kelimeyi ayni dizindeki dosyalarda arama
 map <F4> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR> 
 
@@ -62,3 +68,8 @@ au BufNewFile,BufRead *.cshtml set filetype=html
 call pathogen#infect() 
 call pathogen#helptags()
 
+" CtrlP ile aranan dosyalardan cikarilacaklar
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn|cvs)$',
+	\ 'file': '\v\.(exe|so|dll|class)$',
+	\ }
