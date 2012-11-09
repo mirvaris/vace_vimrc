@@ -93,7 +93,7 @@ let g:ctrlp_custom_ignore = {
 	\ }
 
 " Java'da property'nin ustune gelip ,gs ile getter setter yaratma
-nnoremap <leader>gs maviw<esc>bb"tyew"kyegg/}<CR>NO<CR><esc>d0a	public <esc>"tpa get<esc>"kpb3lgUlea()<esc>i<esc>"tpa <esc>"kp<esc>A {}<esc>i<CR><esc>Oreturn this.<esc>"kpa;<esc>jo<CR><esc>d0a	public void set<esc>"kpb3lgUlea()<esc>i<esc>"tpa <esc>"kpA {}<esc>i<CR><esc>Othis.<esc>"kpa = <esc>"kpa;<esc>:nohlsearch<CR>`a
+nnoremap <leader>gs maviw<esc>bb"tyew"kyegg/}<CR>NO<CR><esc>d0a	public <esc>"tpa get<esc>"kpb3lgUlea() {}<esc>i<CR><esc>Oreturn this.<esc>"kpa;<esc>jo<CR><esc>d0a	public void set<esc>"kpb3lgUlea()<esc>i<esc>"tpa <esc>"kpA {}<esc>i<CR><esc>Othis.<esc>"kpa = <esc>"kpa;<esc>:nohlsearch<CR>`a
 
 " bir sonraki parantezin ici
 " :onoremap in( :<c-u>normal! f(vi(<cr>
