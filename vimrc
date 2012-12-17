@@ -5,7 +5,7 @@
 let mapleader = ","
 
 " desert candir. Consoles linux'de DejaVu'ya donusecek
-colorscheme desert
+colorscheme molokai
 set guifont=Consolas:h11
 
 " swap ve backup dosyalarindan kurtulma
@@ -16,6 +16,14 @@ set noswapfile
 set ts=4
 set sw=4
 set cindent
+set expandtab
+
+" Cursor'in bulundugu satiri highlight etme
+set cursorline
+
+set ttyfast
+
+set relativenumber
 
 " vertical split'de yenisini default sag tarafta yaratma
 set splitright
@@ -24,14 +32,45 @@ set splitright
 inoremap jj <Esc>
 " inoremap jk <Esc>
 
+" j ve k file satiri yerine screen satirina gore hareket ediyor
+nnoremap j gj
+nnoremap k gk
+
 " Command mode'a gecmek icin : kullanmak yerine  ; kullanabilme
 nnoremap ; :
+
+" Search'de perl style arama icin
+nnoremap / /\v
+vnoremap / /\v
+
+" Hizli substitude
+nnoremap <leader>s :%s/\v
+vnoremap <leader>s :'<'>s/\v
+
+" Default case insensitive arama ama uppercase geciyorsa sensitve'e donme
+set ignorecase
+set smartcase
+
+" Sustitute'lari default global yapma
+set gdefault
+
+" Yazarken search resulti gosterme
+set incsearch
+set showmatch
+set hlsearch
 
 " insert mode'da backspace yapildiginda satir biterse ust satirdan devam etme
 set backspace=indent,eol,start
 
 " cursor'in nerede oldugunu gosterme
 set ruler
+
+" command completion daha bi cobariyo
+set wildmenu
+set wildmode=list:longest
+
+set showmode
+set showcmd
 
 " Tablar arasinda kolay gezme
 noremap <S-H> gT          
@@ -56,7 +95,10 @@ nnoremap <silent> <leader>/ :nohlsearch<CR>
 " ,sorc ile de bu dosyayi calistirma
 " boylece vim'i kapatip acmak gerekmiyor
 nnoremap <leader>rc :vsplit $MYVIMRC<cr>
-nnoremap <leader>src :source $MYVIMRC<cr>
+nnoremap <leader>rrc :source $MYVIMRC<cr>
+
+" Paste edilen text'i visual olarak secmeye yarar
+nnoremap <leader>v V`]
 
 " fold blocklarini daha sade gosterme
 set foldtext=getline(v:foldstart)
@@ -76,24 +118,48 @@ noremap <c-k> <c-W>k
 noremap <c-h> <c-W>h
 noremap <c-l> <c-W>l
 
+" Split window yaratma
+nnoremap <leader>w <C-w>v<C-w>l
+
 " F4 ile uzerinde bulunulan kelimeyi ayni dizindeki dosyalarda arama
-noremap <F4> :execute "vimgrep /" . expand("<cword>") . "/j **" <Bar> cw<CR> 
+noremap <F4> :execute "Ack -i " . expand("<cword>") . " **" <Bar> cw<CR> 
+
+" Ack ile hizli search icin
+nnoremap <leader>a :Ack -i 
 
 " cshtml uzantili dosyalari html gibi renklendir
 au BufNewFile,BufRead *.cshtml set filetype=html
 
+" snipmate icin gerekli bu
+filetype plugin on
+
 " Pathogen
 call pathogen#infect() 
 call pathogen#helptags()
+call pathogen#infect('~\vimfiles\bundles') 
 
 " CtrlP ile aranan dosyalardan cikarilacaklar
+let g:ctrlp_map = '<c-o>'
 let g:ctrlp_custom_ignore = {
 	\ 'dir':  '\v[\/]\.(git|hg|svn|cvs)$',
 	\ 'file': '\v\.(exe|so|dll|class)$',
 	\ }
 
+" YankRing icin kisa yol
+nnoremap <silent> <F3> :YRShow<cr>
+inoremap <silent> <F3> <ESC>:YRShow<cr>
+
 " Java'da property'nin ustune gelip ,gs ile getter setter yaratma
 nnoremap <leader>gs maviw<esc>bb"tyew"kyegg/}<CR>NO<CR><esc>d0a	public <esc>"tpa get<esc>"kpb3lgUlea() {}<esc>i<CR><esc>Oreturn this.<esc>"kpa;<esc>jo<CR><esc>d0a	public void set<esc>"kpb3lgUlea()<esc>i<esc>"tpa <esc>"kpA {}<esc>i<CR><esc>Othis.<esc>"kpa = <esc>"kpa;<esc>:nohlsearch<CR>`a
 
+" plsql.vim sadace plsql uzuntili dosyalar icin calisiyor.
+" Asagidaki ile genisletiyoruz
+autocmd BufRead *.pkb set syntax=plsql
+autocmd BufRead *.pks set syntax=plsql
+autocmd BufRead *.sql set syntax=plsql
+
 " bir sonraki parantezin ici
 " :onoremap in( :<c-u>normal! f(vi(<cr>
+
+" Taglist plugini icin Toggle
+nnoremap <leader>t :TagbarToggle<cr>
