@@ -30,6 +30,7 @@ Bundle 'vim-scripts/YankRing.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'vim-scripts/UltiSnips'
 Bundle 'vim-scripts/taglist.vim'
+Bundle 'vim-scripts/Tagbar'
 Bundle 'scrooloose/syntastic'
 
 
