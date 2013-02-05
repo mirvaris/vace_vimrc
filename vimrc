@@ -17,7 +17,6 @@ Bundle 'tpope/vim-git'
 Bundle 'tpope/vim-fugitive'
 Bundle 'rstacruz/sparkup', {'rtp': 'vim'}
 Bundle 'wincent/Command-T'
-Bundle 'c9s/bufexplorer'
 Bundle 'gmarik/vim-markdown'
 Bundle 'L9'
 Bundle 'molokai'
@@ -27,16 +26,17 @@ Bundle 'FuzzyFinder'
 Bundle 'repeat.vim'
 Bundle 'surround.vim'
 Bundle 'Lokaltog/vim-easymotion'
-let g:EasyMotion_leader_key='<LocalLeader>'
 Bundle 'vim-scripts/YankRing.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'vim-scripts/UltiSnips'
+Bundle 'vim-scripts/taglist.vim'
 Bundle 'scrooloose/syntastic'
 
 
 
 " leader'i , olarak set ediyorum. elime daha rahat geliyor
 let mapleader = ","
+let maplocalleader = "  "
 
 " desert candir. Consoles linux'de DejaVu'ya donusecek
 colorscheme molokai
@@ -154,20 +154,18 @@ noremap <c-k> <c-W>k
 noremap <c-h> <c-W>h
 noremap <c-l> <c-W>l
 
-" Split window yaratma
-nnoremap <leader>w <C-w>v<C-w>l
-
 " F4 ile uzerinde bulunulan kelimeyi ayni dizindeki dosyalarda arama
 noremap <F4> :execute "Ack -i " . expand("<cword>") . " **" <Bar> cw<CR> 
 
 " Ack ile hizli search icin
 nnoremap <leader>a :Ack -i 
 
-" cshtml uzantili dosyalari html gibi renklendir
-au BufNewFile,BufRead *.cshtml set filetype=html
-
 " snipmate icin gerekli bu
 filetype plugin indent on
+
+" FuzzyFinder ayarlari
+nnoremap <leader>f  :FufFile<CR>
+nnoremap <leader>b  :FufBuffer<CR>
 
 " CtrlP ile aranan dosyalardan cikarilacaklar
 let g:ctrlp_map = '<c-o>'
