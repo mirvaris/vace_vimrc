@@ -1,5 +1,38 @@
-" My Extensions
-" ----------------------------------------------------------------
+set nocompatible
+source $VIMRUNTIME/vimrc_example.vim
+source $VIMRUNTIME/mswin.vim
+behave mswin
+
+" Vundle ile bundle'lari kurma
+filetype off                   " required!
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required! 
+Bundle 'gmarik/vundle'
+
+" Kurulacak bundle'lar
+Bundle 'tpope/vim-git'
+Bundle 'tpope/vim-fugitive'
+Bundle 'rstacruz/sparkup', {'rtp': 'vim'}
+Bundle 'wincent/Command-T'
+Bundle 'c9s/bufexplorer'
+Bundle 'gmarik/vim-markdown'
+Bundle 'L9'
+Bundle 'molokai'
+Bundle 'jQuery'
+Bundle 'Gundo'
+Bundle 'FuzzyFinder'
+Bundle 'repeat.vim'
+Bundle 'surround.vim'
+Bundle 'Lokaltog/vim-easymotion'
+let g:EasyMotion_leader_key='<LocalLeader>'
+Bundle 'kien/ctrlp.vim'
+Bundle 'vim-scripts/UltiSnips'
+Bundle 'scrooloose/syntastic'
+
+
 
 " leader'i , olarak set ediyorum. elime daha rahat geliyor
 let mapleader = ","
@@ -42,6 +75,8 @@ nnoremap ; :
 " Search'de perl style arama icin
 nnoremap / /\v
 vnoremap / /\v
+nnoremap ? ?\v
+vnoremap ? ?\v
 
 " Hizli substitude
 nnoremap <leader>s :%s/\v
@@ -52,7 +87,7 @@ set ignorecase
 set smartcase
 
 " Sustitute'lari default global yapma
-set gdefault
+" set gdefault
 
 " Yazarken search resulti gosterme
 set incsearch
@@ -131,12 +166,7 @@ nnoremap <leader>a :Ack -i
 au BufNewFile,BufRead *.cshtml set filetype=html
 
 " snipmate icin gerekli bu
-filetype plugin on
-
-" Pathogen
-call pathogen#infect() 
-call pathogen#helptags()
-call pathogen#infect('~\vimfiles\bundles') 
+filetype plugin indent on
 
 " CtrlP ile aranan dosyalardan cikarilacaklar
 let g:ctrlp_map = '<c-o>'
@@ -152,14 +182,33 @@ inoremap <silent> <F3> <ESC>:YRShow<cr>
 " Java'da property'nin ustune gelip ,gs ile getter setter yaratma
 nnoremap <leader>gs maviw<esc>bb"tyew"kyegg/}<CR>NO<CR><esc>d0a	public <esc>"tpa get<esc>"kpb3lgUlea() {}<esc>i<CR><esc>Oreturn this.<esc>"kpa;<esc>jo<CR><esc>d0a	public void set<esc>"kpb3lgUlea()<esc>i<esc>"tpa <esc>"kpA {}<esc>i<CR><esc>Othis.<esc>"kpa = <esc>"kpa;<esc>:nohlsearch<CR>`a
 
-" plsql.vim sadace plsql uzuntili dosyalar icin calisiyor.
-" Asagidaki ile genisletiyoruz
-autocmd BufRead *.pkb set syntax=plsql
-autocmd BufRead *.pks set syntax=plsql
-autocmd BufRead *.sql set syntax=plsql
-
+nnoremap <leader><space> :%s/\s\+$//g<CR>:nohlsearch<CR>
 " bir sonraki parantezin ici
 " :onoremap in( :<c-u>normal! f(vi(<cr>
 
 " Taglist plugini icin Toggle
 nnoremap <leader>t :TagbarToggle<cr>
+
+
+" vimrc her source'landiginda autocmd'lar yeniden yaratilmasin diye
+" bu sekilde bir kontrol koyuluyor. Eger bu kisma birsey eklenirse
+" vimrc source'lanmadan onde :autocmd!  'i calistirin
+if !exists("rc_autocommands")
+    let rc_autocommands = 1
+
+    " plsql.vim sadace plsql uzuntili dosyalar icin calisiyor.
+    " Asagidaki ile genisletiyoruz
+    autocmd BufRead *.pkb set syntax=plsql
+    autocmd BufRead *.pks set syntax=plsql
+    autocmd BufRead *.sql set syntax=plsql
+
+    autocmd BufRead *mylog.txt setlocal guifont=Consolas:h09
+    autocmd BufRead *doitmyway.txt setlocal guifont=Consolas:h09
+endif
+
+let g:UltiSnipsUsePythonVersion = 2
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsEditSplit="vertical"
+
