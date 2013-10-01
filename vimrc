@@ -9,7 +9,7 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " let Vundle manage Vundle
-" required! 
+" required!
 Bundle 'gmarik/vundle'
 
 " Kurulacak bundle'lar
@@ -32,12 +32,18 @@ Bundle 'vim-scripts/UltiSnips'
 Bundle 'vim-scripts/taglist.vim'
 Bundle 'vim-scripts/Tagbar'
 Bundle 'scrooloose/syntastic'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'lunaru/vim-less'
+Bundle 'godlygeek/tabular'
+Bundle 'wavded/vim-stylus'
+Bundle 'mileszs/ack.vim'
+Bundle 'derekwyatt/vim-scala'
 
 
 
 " leader'i , olarak set ediyorum. elime daha rahat geliyor
 let mapleader = ","
-let maplocalleader = "  "
+let maplocalleader = " "
 
 " desert candir. Consoles linux'de DejaVu'ya donusecek
 colorscheme molokai
@@ -71,7 +77,7 @@ inoremap jj <Esc>
 nnoremap j gj
 nnoremap k gk
 
-" Command mode'a gecmek icin : kullanmak yerine  ; kullanabilme
+" Command mode'a gecmek icin : kullanmak yerine ; kullanabilme
 nnoremap ; :
 
 " Search'de perl style arama icin
@@ -110,7 +116,7 @@ set showmode
 set showcmd
 
 " Tablar arasinda kolay gezme
-noremap <S-H> gT          
+noremap <S-H> gT
 noremap <S-L> gt
 
 " Y ile satir sonuna kadar yank'lama. C ve D gibi
@@ -120,11 +126,11 @@ nnoremap Y y$
 cnoremap cd. lcd %:p:h
 
 " visual shifting (does not exit Visual mode)
-vnoremap < <gv
-vnoremap > >gv 
+" vnoremap < <gv
+" vnoremap > >gv
 
-" ,/ ile search highlight'larini kaldirma. 
-" /asdf gibi sacma bi search yapmaya gerek kalmiyor ve 
+" ,/ ile search highlight'larini kaldirma.
+" /asdf gibi sacma bi search yapmaya gerek kalmiyor ve
 " search history de oldugu gibi kalmis oluyor
 nnoremap <silent> <leader>/ :nohlsearch<CR>
 
@@ -139,15 +145,15 @@ nnoremap <leader>v V`]
 
 " fold blocklarini daha sade gosterme
 set foldtext=getline(v:foldstart)
-set fillchars=fold:\ 
+set fillchars=fold:\
 
 " alt ve yon tuslari ile satirin yerini degistirme
-nnoremap <a-j> :m+<CR>==
-nnoremap <a-k> :m-2<CR>==
-inoremap <a-j> <Esc>:m+<CR>==gi
-inoremap <a-k> <Esc>:m-2<CR>==gi
-vnoremap <a-j> :m'>+<CR>gv=gv
-vnoremap <a-k> :m-2<CR>gv=gv
+nnoremap <A-j> :m+<CR>==
+nnoremap <A-k> :m-2<CR>==
+inoremap <A-j> <Esc>:m+<CR>==gi
+inoremap <A-k> <Esc>:m-2<CR>==gi
+vnoremap <A-j> :m'>+<CR>gv=gv
+vnoremap <A-k> :m-2<CR>gv=gv
 
 " Smart way to move between windows
 noremap <c-j> <c-W>j
@@ -156,31 +162,34 @@ noremap <c-h> <c-W>h
 noremap <c-l> <c-W>l
 
 " F4 ile uzerinde bulunulan kelimeyi ayni dizindeki dosyalarda arama
-noremap <F4> :execute "Ack -i " . expand("<cword>") . " **" <Bar> cw<CR> 
+noremap <F4> :execute "Ack -i " . expand("<cword>") . " **" <Bar> cw<CR>
+
+" GundoToggle'i cagirma
+nnoremap <F5> :GundoToggle<CR>
 
 " Ack ile hizli search icin
-nnoremap <leader>a :Ack -i 
+nnoremap <leader>a :Ack -i
 
 " snipmate icin gerekli bu
 filetype plugin indent on
 
 " FuzzyFinder ayarlari
-nnoremap <leader>f  :FufFile<CR>
-nnoremap <leader>b  :FufBuffer<CR>
+nnoremap <leader>f :FufFile<CR>
+nnoremap <leader>b :FufBuffer<CR>
 
 " CtrlP ile aranan dosyalardan cikarilacaklar
 let g:ctrlp_map = '<c-o>'
 let g:ctrlp_custom_ignore = {
-	\ 'dir':  '\v[\/]\.(git|hg|svn|cvs)$',
-	\ 'file': '\v\.(exe|so|dll|class)$',
-	\ }
+\ 'dir': '\v[\/]\.(git|hg|svn|cvs)$',
+\ 'file': '\v\.(exe|so|dll|class)$',
+\ }
 
 " YankRing icin kisa yol
 nnoremap <silent> <F3> :YRShow<cr>
 inoremap <silent> <F3> <ESC>:YRShow<cr>
 
 " Java'da property'nin ustune gelip ,gs ile getter setter yaratma
-nnoremap <leader>gs maviw<esc>bb"tyew"kyegg/}<CR>NO<CR><esc>d0a	public <esc>"tpa get<esc>"kpb3lgUlea() {}<esc>i<CR><esc>Oreturn this.<esc>"kpa;<esc>jo<CR><esc>d0a	public void set<esc>"kpb3lgUlea()<esc>i<esc>"tpa <esc>"kpA {}<esc>i<CR><esc>Othis.<esc>"kpa = <esc>"kpa;<esc>:nohlsearch<CR>`a
+nnoremap <leader>gs maviw<esc>bb"tyew"kyegg/}<CR>NO<CR><esc>d0a public <esc>"tpa get<esc>"kpb3lgUlea() {}<esc>i<CR><esc>Oreturn this.<esc>"kpa;<esc>jo<CR><esc>d0a public void set<esc>"kpb3lgUlea()<esc>i<esc>"tpa <esc>"kpA {}<esc>i<CR><esc>Othis.<esc>"kpa = <esc>"kpa;<esc>:nohlsearch<CR>`a
 
 nnoremap <leader><space> :%s/\s\+$//g<CR>:nohlsearch<CR>
 " bir sonraki parantezin ici
@@ -192,18 +201,18 @@ nnoremap <leader>t :TagbarToggle<cr>
 
 " vimrc her source'landiginda autocmd'lar yeniden yaratilmasin diye
 " bu sekilde bir kontrol koyuluyor. Eger bu kisma birsey eklenirse
-" vimrc source'lanmadan onde :autocmd!  'i calistirin
+" vimrc source'lanmadan onde :autocmd! 'i calistirin
 if !exists("rc_autocommands")
     let rc_autocommands = 1
 
-    " plsql.vim sadace plsql uzuntili dosyalar icin calisiyor.
-    " Asagidaki ile genisletiyoruz
+" plsql.vim sadace plsql uzuntili dosyalar icin calisiyor.
+" Asagidaki ile genisletiyoruz
     autocmd BufRead *.pkb set syntax=plsql
     autocmd BufRead *.pks set syntax=plsql
     autocmd BufRead *.sql set syntax=plsql
 
-    autocmd BufRead *mylog.txt setlocal guifont=Consolas:h09
-    autocmd BufRead *doitmyway.txt setlocal guifont=Consolas:h09
+    "autocmd BufRead *mylog.txt setlocal guifont=Consolas:h09
+    "autocmd BufRead *doitmyway.txt setlocal guifont=Consolas:h09
 endif
 
 let g:UltiSnipsUsePythonVersion = 2
@@ -212,3 +221,4 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="vertical"
 
+let g:sparkupNextMapping="<C-S-n>"
