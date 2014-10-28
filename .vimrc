@@ -1,53 +1,76 @@
+
 set nocompatible
-source $VIMRUNTIME/vimrc_example.vim
-source $VIMRUNTIME/mswin.vim
-behave mswin
+
+if has("win32")
+    source $VIMRUNTIME/vimrc_example.vim
+    source $VIMRUNTIME/mswin.vim
+    behave mswin
+endif
 
 " Vundle ile bundle'lari kurma
 filetype off                   " required!
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+if has("win32")
+    set rtp+=~/vimfiles/bundle/Vundle.vim/
+    let path='~/vimfiles/bundle'
+else
+    set rtp+=~/.vim/bundle/Vundle.vim/
+    let path='~/.vim/bundle'
+endif
+
+call vundle#begin(path) 
 
 " let Vundle manage Vundle
 " required!
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
-" Kurulacak bundle'lar
-Bundle 'tpope/vim-git'
-Bundle 'tpope/vim-fugitive'
-Bundle 'rstacruz/sparkup', {'rtp': 'vim'}
-Bundle 'wincent/Command-T'
-Bundle 'gmarik/vim-markdown'
-Bundle 'L9'
-Bundle 'molokai'
-Bundle 'jQuery'
-Bundle 'Gundo'
-Bundle 'FuzzyFinder'
-Bundle 'repeat.vim'
-Bundle 'surround.vim'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'vim-scripts/YankRing.vim'
-Bundle 'kien/ctrlp.vim'
-Bundle 'vim-scripts/UltiSnips'
-Bundle 'vim-scripts/taglist.vim'
-Bundle 'vim-scripts/Tagbar'
-Bundle 'scrooloose/syntastic'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'lunaru/vim-less'
-Bundle 'godlygeek/tabular'
-Bundle 'wavded/vim-stylus'
-Bundle 'mileszs/ack.vim'
-Bundle 'derekwyatt/vim-scala'
+" Plugins to insall
+" Required for vundle
+Plugin 'L9'  
+Plugin 'molokai'
+Plugin 'kien/ctrlp.vim'
+Plugin 'Gundo'
+Plugin 'repeat.vim'
+Plugin 'surround.vim'
+Plugin 'godlygeek/tabular'
+Plugin 'vim-scripts/YankRing.vim'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'mattn/emmet-vim'
+Plugin 'heartsentwined/vim-emblem'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'wavded/vim-stylus'
+Plugin 'digitaltoad/vim-jade'
+Plugin 'majutsushi/tagbar'
+Plugin 'lukaszkorecki/CoffeeTags' 
+Plugin 'tpope/vim-vinegar'
+Plugin 'junegunn/seoul256.vim'
+Plugin 'mileszs/ack.vim'
+Plugin 'rstacruz/sparkup', {'rtp': 'vim'}
+Plugin 'tpope/vim-git'
+Plugin 'tpope/vim-fugitive'
+Plugin 'FuzzyFinder'
+"Plugin 'derekwyatt/vim-scala'
+"Plugin 'wincent/Command-T'
 
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
 
 
 " leader'i , olarak set ediyorum. elime daha rahat geliyor
 let mapleader = ","
 let maplocalleader = " "
 
-" desert candir. Consoles linux'de DejaVu'ya donusecek
+" Temp'i yazma hakki olan bir yere set etme
+" let $TMP = "E:/Temp"
+
 colorscheme molokai
-set guifont=Consolas:h11
+if has("win32")
+    set guifont=Consolas:h11
+else
+    set guifont="Droid Sans Mono 10"
+end
 
 " swap ve backup dosyalarindan kurtulma
 set nobackup
@@ -56,7 +79,6 @@ set noswapfile
 " tab ve indentation'i (shift width) 4e set etme
 set ts=4
 set sw=4
-set cindent
 set expandtab
 
 " Cursor'in bulundugu satiri highlight etme
@@ -71,20 +93,17 @@ set splitright
 
 " jj ile esc yapilmasini saglar
 inoremap jj <Esc>
-" inoremap jk <Esc>
 
 " j ve k file satiri yerine screen satirina gore hareket ediyor
 nnoremap j gj
 nnoremap k gk
 
-" Command mode'a gecmek icin : kullanmak yerine ; kullanabilme
-nnoremap ; :
 
 " Search'de perl style arama icin
-nnoremap / /\v
-vnoremap / /\v
-nnoremap ? ?\v
-vnoremap ? ?\v
+"nnoremap / /\v
+"vnoremap / /\v
+"nnoremap ? ?\v
+"vnoremap ? ?\v
 
 " Hizli substitude
 nnoremap <leader>s :%s/\v
@@ -115,6 +134,9 @@ set wildmode=list:longest
 set showmode
 set showcmd
 
+"Default encoding utf-8 
+set encoding=utf-8 nobomb
+
 " Tablar arasinda kolay gezme
 noremap <S-H> gT
 noremap <S-L> gt
@@ -125,9 +147,6 @@ nnoremap Y y$
 " cd. ile working directory'yi file'in bulundugu folder'a set etme
 cnoremap cd. lcd %:p:h
 
-" visual shifting (does not exit Visual mode)
-" vnoremap < <gv
-" vnoremap > >gv
 
 " ,/ ile search highlight'larini kaldirma.
 " /asdf gibi sacma bi search yapmaya gerek kalmiyor ve
@@ -161,26 +180,28 @@ noremap <c-k> <c-W>k
 noremap <c-h> <c-W>h
 noremap <c-l> <c-W>l
 
-" F4 ile uzerinde bulunulan kelimeyi ayni dizindeki dosyalarda arama
+"Bos satirlari silme
+nnoremap <leader><space> :%s/\s\+$//g<CR>:nohlsearch<CR>
+
+
+" Plugin ayarlari --------------------------------------------------------
+
+" F4 ile uzerinde bulunulan kelimeyi ayni dizindeki dosyalarda arama. Ack'a  hizli erisim
 noremap <F4> :execute "Ack -i " . expand("<cword>") . " **" <Bar> cw<CR>
-
-" GundoToggle'i cagirma
-nnoremap <F5> :GundoToggle<CR>
-
-" Ack ile hizli search icin
 nnoremap <leader>a :Ack -i
 
-" snipmate icin gerekli bu
-filetype plugin indent on
+" Gundo Toggle'i cagirma
+nnoremap <F5> :GundoToggle<CR>
 
 " FuzzyFinder ayarlari
-nnoremap <leader>f :FufFile<CR>
-nnoremap <leader>b :FufBuffer<CR>
+nnoremap <leader>ff :FufFile<CR>
+nnoremap <leader>fb :FufBuffer<CR>
+nnoremap <leader>fr :FufRenewCache<CR>
 
 " CtrlP ile aranan dosyalardan cikarilacaklar
-let g:ctrlp_map = '<c-o>'
+let g:ctrlp_map = '<a-n>'
 let g:ctrlp_custom_ignore = {
-\ 'dir': '\v[\/]\.(git|hg|svn|cvs)$',
+\ 'dir': '\v[\/]\.(git|hg|svn|cvs|idea)$',
 \ 'file': '\v\.(exe|so|dll|class)$',
 \ }
 
@@ -188,31 +209,32 @@ let g:ctrlp_custom_ignore = {
 nnoremap <silent> <F3> :YRShow<cr>
 inoremap <silent> <F3> <ESC>:YRShow<cr>
 
-" Java'da property'nin ustune gelip ,gs ile getter setter yaratma
-nnoremap <leader>gs maviw<esc>bb"tyew"kyegg/}<CR>NO<CR><esc>d0a public <esc>"tpa get<esc>"kpb3lgUlea() {}<esc>i<CR><esc>Oreturn this.<esc>"kpa;<esc>jo<CR><esc>d0a public void set<esc>"kpb3lgUlea()<esc>i<esc>"tpa <esc>"kpA {}<esc>i<CR><esc>Othis.<esc>"kpa = <esc>"kpa;<esc>:nohlsearch<CR>`a
+" Ultisnip
 
-nnoremap <leader><space> :%s/\s\+$//g<CR>:nohlsearch<CR>
-" bir sonraki parantezin ici
-" :onoremap in( :<c-u>normal! f(vi(<cr>
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
-" Taglist plugini icin Toggle
-nnoremap <leader>t :TagbarToggle<cr>
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 
+" Tagbar'i acmak icin
+nmap <F8> :TagbarToggle<CR>
+
+"Markdown filelarini otomatik algilamasi
+autocmd BufNewFile,BufReadPost *.md set filetype=markdow
 
 " vimrc her source'landiginda autocmd'lar yeniden yaratilmasin diye
 " bu sekilde bir kontrol koyuluyor. Eger bu kisma birsey eklenirse
 " vimrc source'lanmadan onde :autocmd! 'i calistirin
 if !exists("rc_autocommands")
     let rc_autocommands = 1
-
 " plsql.vim sadace plsql uzuntili dosyalar icin calisiyor.
 " Asagidaki ile genisletiyoruz
     autocmd BufRead *.pkb set syntax=plsql
     autocmd BufRead *.pks set syntax=plsql
     autocmd BufRead *.sql set syntax=plsql
-
-    "autocmd BufRead *mylog.txt setlocal guifont=Consolas:h09
-    "autocmd BufRead *doitmyway.txt setlocal guifont=Consolas:h09
 endif
 
 let g:UltiSnipsUsePythonVersion = 2
@@ -222,3 +244,19 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:UltiSnipsEditSplit="vertical"
 
 let g:sparkupNextMapping="<C-S-n>"
+
+if executable('coffeetags')
+  let g:tagbar_type_coffee = {
+        \ 'ctagsbin' : 'coffeetags',
+        \ 'ctagsargs' : '',
+        \ 'kinds' : [
+        \ 'f:functions',
+        \ 'o:object',
+        \ ],
+        \ 'sro' : ".",
+        \ 'kind2scope' : {
+        \ 'f' : 'object',
+        \ 'o' : 'object',
+        \ }
+        \ }
+endif
