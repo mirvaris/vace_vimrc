@@ -52,6 +52,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'FuzzyFinder'
 "Plugin 'derekwyatt/vim-scala'
 "Plugin 'wincent/Command-T'
+Plugin 'tpope/vim-projectionist'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
