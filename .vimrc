@@ -91,6 +91,7 @@ set relativenumber
 
 " vertical split'de yenisini default sag tarafta yaratma
 set splitright
+set splitbelow
 
 " jj ile esc yapilmasini saglar
 inoremap jj <Esc>
