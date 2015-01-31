@@ -53,6 +53,7 @@ Plugin 'FuzzyFinder'
 "Plugin 'derekwyatt/vim-scala'
 "Plugin 'wincent/Command-T'
 Plugin 'tpope/vim-projectionist'
+Plugin 'elzr/vim-json'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -262,3 +263,16 @@ if executable('coffeetags')
         \ }
         \ }
 endif
+
+"JSON Plugin
+au! BufRead,BufNewFile *.json set filetype=json
+
+augroup json_autocmd
+  autocmd!
+  autocmd FileType json set autoindent
+  autocmd FileType json set formatoptions=tcq2l
+  autocmd FileType json set textwidth=78 shiftwidth=2
+  autocmd FileType json set softtabstop=2 tabstop=8
+  autocmd FileType json set expandtab
+  autocmd FileType json set foldmethod=syntax
+augroup END
