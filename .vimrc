@@ -78,8 +78,8 @@ set nobackup
 set noswapfile
 
 " tab ve indentation'i (shift width) 4e set etme
-set ts=4
-set sw=4
+set ts=2
+set sw=2
 set expandtab
 
 " Cursor'in bulundugu satiri highlight etme
