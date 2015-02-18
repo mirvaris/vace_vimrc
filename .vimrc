@@ -79,8 +79,8 @@ set nobackup
 set noswapfile
 
 " tab ve indentation'i (shift width) 4e set etme
-set ts=4
-set sw=4
+set ts=2
+set sw=2
 set expandtab
 
 " Cursor'in bulundugu satiri highlight etme
@@ -197,9 +197,9 @@ nnoremap <leader>a :Ack -i
 nnoremap <F5> :GundoToggle<CR>
 
 " FuzzyFinder ayarlari
-nnoremap <leader>ff :FufFile<CR>
-nnoremap <leader>fb :FufBuffer<CR>
-nnoremap <leader>fr :FufRenewCache<CR>
+nnoremap <leader>nf :FufFile<CR>
+nnoremap <leader>nb :FufBuffer<CR>
+nnoremap <leader>nr :FufRenewCache<CR>
 
 " CtrlP ile aranan dosyalardan cikarilacaklar
 let g:ctrlp_map = '<a-n>'
@@ -276,3 +276,6 @@ augroup json_autocmd
   autocmd FileType json set expandtab
   autocmd FileType json set foldmethod=syntax
 augroup END
+
+"JSON Format
+nnoremap <leader>fj :%!python -m json.tool<CR>
