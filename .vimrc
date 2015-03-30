@@ -55,6 +55,10 @@ Plugin 'FuzzyFinder'
 Plugin 'tpope/vim-projectionist'
 Plugin 'elzr/vim-json'
 
+"Plugins for sql formatting
+Plugin 'Align'
+Plugin 'SQLUtilities'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -278,4 +282,7 @@ augroup json_autocmd
 augroup END
 
 "JSON Format
-nnoremap <leader>fj :%!python -m json.tool<CR>
+nnoremap <silent><leader>fj :%!python -m json.tool<CR>
+
+"SQL Format
+vnoremap <silent><leader>fs :SQLUFormatter<CR>
