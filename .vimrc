@@ -286,3 +286,8 @@ nnoremap <silent><leader>fj :%!python -m json.tool<CR>
 
 "SQL Format
 vnoremap <silent><leader>fs :SQLUFormatter<CR>
+
+"Tablularize
+vnoremap <leader>tt :Tabularize /\t<CR>
+vnoremap <leader>t, :Tabularize /\,<CR>
+vnoremap <leader>t| :Tabularize /|<CR>
