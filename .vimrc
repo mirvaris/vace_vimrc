@@ -164,7 +164,10 @@ nnoremap <silent> <leader>/ :nohlsearch<CR>
 " ,sorc ile de bu dosyayi calistirma
 " boylece vim'i kapatip acmak gerekmiyor
 nnoremap <leader>rc :vsplit $MYVIMRC<cr>
-nnoremap <leader>rrc :source $MYVIMRC<cr>
+nnoremap <leader>rcs :source $MYVIMRC<cr>
+
+" source current file
+nnoremap <leader>rs :source %<cr>
 
 " Paste edilen text'i visual olarak secmeye yarar
 nnoremap <leader>v V`]
