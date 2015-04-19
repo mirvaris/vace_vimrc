@@ -31,7 +31,6 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'Gundo'
 Plugin 'repeat.vim'
 Plugin 'surround.vim'
-Plugin 'godlygeek/tabular'
 Plugin 'vim-scripts/YankRing.vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
@@ -55,9 +54,12 @@ Plugin 'FuzzyFinder'
 Plugin 'tpope/vim-projectionist'
 Plugin 'elzr/vim-json'
 
-"Plugins for sql formatting
+"Plugins for formatting
+Plugin 'godlygeek/tabular'
 Plugin 'Align'
 Plugin 'SQLUtilities'
+
+Plugin 'Lokaltog/vim-easymotion'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -290,7 +292,3 @@ nnoremap <silent><leader>fj :%!python -m json.tool<CR>
 "SQL Format
 vnoremap <silent><leader>fs :SQLUFormatter<CR>
 
-"Tablularize
-vnoremap <leader>tt :Tabularize /\t<CR>
-vnoremap <leader>t, :Tabularize /\,<CR>
-vnoremap <leader>t| :Tabularize /|<CR>
