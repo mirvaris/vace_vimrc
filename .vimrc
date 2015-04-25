@@ -61,6 +61,7 @@ Plugin 'SQLUtilities'
 
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'vim-scripts/netrw.vim'
+Plugin 'groenewege/vim-less'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
