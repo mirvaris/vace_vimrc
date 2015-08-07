@@ -61,6 +61,7 @@ Plugin 'SQLUtilities'
 
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'vim-scripts/netrw.vim'
+Plugin 'groenewege/vim-less'
 
 "Color Themes
 Plugin 'widatama/vim-phoenix'
