@@ -62,6 +62,9 @@ Plugin 'SQLUtilities'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'vim-scripts/netrw.vim'
 
+"Color Themes
+Plugin 'widatama/vim-phoenix'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -74,7 +77,9 @@ let maplocalleader = " "
 " Temp'i yazma hakki olan bir yere set etme
 " let $TMP = "E:/Temp"
 
-colorscheme molokai
+"colorscheme molokai
+colorscheme phoenix
+PhoenixPurple
 if has("win32")
     set guifont=Consolas:h11
 else
@@ -195,6 +200,9 @@ noremap <c-l> <c-W>l
 
 "Bos satirlari silme
 nnoremap <leader><space> :%s/\s\+$//g<CR>:nohlsearch<CR>
+
+"Paste edilen satiri secme
+nnoremap gp `[v`]
 
 
 " Plugin ayarlari --------------------------------------------------------
