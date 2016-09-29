@@ -1,23 +1,8 @@
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
-set nocompatible
-
-if has("win32")
-    source $VIMRUNTIME/vimrc_example.vim
-    source $VIMRUNTIME/mswin.vim
-    behave mswin
-endif
-
-" Vundle ile bundle'lari kurma
-filetype off                   " required!
-if has("win32")
-    set rtp+=~/vimfiles/bundle/Vundle.vim/
-    let path='~/vimfiles/bundle'
-else
-    set rtp+=~/.vim/bundle/Vundle.vim/
-    let path='~/.vim/bundle'
-endif
-
-call vundle#begin(path) 
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin() 
 
 " let Vundle manage Vundle
 " required!
@@ -26,7 +11,7 @@ Plugin 'gmarik/vundle'
 " Plugins to insall
 " Required for vundle
 Plugin 'L9'  
-Plugin 'molokai'
+" Plugin 'molokai'
 Plugin 'kien/ctrlp.vim'
 Plugin 'Gundo'
 Plugin 'repeat.vim'
@@ -35,13 +20,6 @@ Plugin 'vim-scripts/YankRing.vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'mattn/emmet-vim'
-Plugin 'heartsentwined/vim-emblem'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'wavded/vim-stylus'
-Plugin 'digitaltoad/vim-jade'
-Plugin 'majutsushi/tagbar'
-Plugin 'lukaszkorecki/CoffeeTags' 
 Plugin 'tpope/vim-vinegar'
 Plugin 'junegunn/seoul256.vim'
 Plugin 'mileszs/ack.vim'
@@ -63,6 +41,19 @@ Plugin 'Lokaltog/vim-easymotion'
 Plugin 'vim-scripts/netrw.vim'
 Plugin 'groenewege/vim-less'
 
+" Plugin 'Valloric/YouCompleteMe'
+
+" JS plugins
+Plugin 'ternjs/tern_for_vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'heartsentwined/vim-emblem'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'wavded/vim-stylus'
+Plugin 'digitaltoad/vim-jade'
+Plugin 'majutsushi/tagbar'
+Plugin 'scrooloose/syntastic'
+
 "Color Themes
 Plugin 'widatama/vim-phoenix'
 
@@ -79,8 +70,12 @@ let maplocalleader = " "
 " let $TMP = "E:/Temp"
 
 "colorscheme molokai
-colorscheme phoenix
-PhoenixPurple
+"colorscheme phoenix
+"PhoenixPurple
+let g:seoul256_background=254
+colorscheme seoul256-light
+highlight Conceal ctermfg=23 ctermbg=254
+
 if has("win32")
     set guifont=Consolas:h11
 else
@@ -232,6 +227,8 @@ nnoremap <silent> <F3> :YRShow<cr>
 inoremap <silent> <F3> <ESC>:YRShow<cr>
 
 " Ultisnip
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
+let g:UltiSnipsUsePythonVersion = 2
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -259,11 +256,6 @@ if !exists("rc_autocommands")
     autocmd BufRead *.sql set syntax=plsql
 endif
 
-let g:UltiSnipsUsePythonVersion = 2
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-let g:UltiSnipsEditSplit="vertical"
 
 let g:sparkupNextMapping="<C-S-n>"
 
@@ -308,4 +300,26 @@ nmap <space> <Plug>(easymotion-s2)
 
 " Turn on case insensitive feature
 let g:EasyMotion_smartcase = 1
+
+" General conceal settings. Will keep things concealed
+" even when your cursor is on top of them.
+set conceallevel=1
+set concealcursor=nvic
+
+" vim-javascript conceal settings.
+let g:javascript_conceal_function = "ƒ"
+let g:javascript_conceal_this = "@"
+let g:javascript_conceal_return = "<"
+let g:javascript_conceal_prototype = "#"
+let g:javascript_conceal_arrow_function = "→"
+
+
+" netrw settings
+nnoremap - :Explore<CR>
+" Split vertical
+let g:netrw_preview=1  
+let g:netrw_alto=0
+" % of window upon o v or p
+let g:netrw_winsize=30 
+
 
