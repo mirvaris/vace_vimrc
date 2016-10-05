@@ -55,6 +55,8 @@ Plugin 'digitaltoad/vim-jade'
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/syntastic'
 
+Plugin 'elmcast/elm-vim'
+
 "Color Themes
 Plugin 'widatama/vim-phoenix'
 
